@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dowry Calculator · Shaadi.org | Satirical Edition</title>
+    <!-- Font Awesome (no emojis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & BASE — angular, minimal roundness, sober mock-serious */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #F2F2F2;
+            color: #2E3B3B;
+            line-height: 1.6;
+        }
+
+        .ast-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header — clean, no emojis */
+        .fun-header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #CFCFCF;
+            padding: 18px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 18px 24px;
+        }
+        .logo img {
+            max-height: 48px;
+        }
+        .nav-placeholder {
+            font-weight: 600;
+            color: #4A6A6A;
+            letter-spacing: 0.3px;
+        }
+        .nav-placeholder i {
+            margin-right: 6px;
+            color: #2F5C5C;
+        }
+
+        /* main section */
+        .dowry-section {
+            background: #FFFFFF;
+            padding: 48px 0;
+        }
+        .inner-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 30px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .left-content {
+            flex: 1;
+            padding: 16px;
+        }
+        .right-form {
+            flex: 1.1;
+            padding: 16px;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-family: 'Montserrat', sans-serif;
+            color: #1C2A2A;
+            margin-bottom: 18px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        .highlight {
+            color: #3F7E7A;
+            font-weight: 800;
+        }
+        .tagline {
+            font-size: 20px;
+            margin-bottom: 28px;
+            color: #3E4E4E;
+            font-weight: 500;
+        }
+        .hand-image {
+            margin-top: 20px;
+        }
+        .hand-image img {
+            max-width: 90%;
+            height: auto;
+        }
+
+        /* form — square, industrial, no rounded corners */
+        .dowry-calculator-form {
+            background: #FEFEFE;
+            padding: 2rem 1.8rem 2rem 1.8rem;
+            border: 1px solid #B9C4C4;
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.04);
+        }
+        .dowry-calculator-form h4 {
+            font-weight: 700;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: #1F2F2F;
+            border-left: 6px solid #4A7A76;
+            padding-left: 16px;
+        }
+        .dowry-calculator-form h4 i {
+            color: #4A7A76;
+            margin-right: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 18px;
+        }
+        .form-group {
+            width: 48%;
+        }
+        /* three-column row for caste/skin/purity */
+        .form-row.three-col .form-group {
+            width: 32%;
+        }
+
+        .dowry-calculator-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #1E3535;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .dowry-calculator-form label i {
+            width: 22px;
+            color: #2A5E5A;
+        }
+
+        .dowry-calculator-form select {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1.5px solid #A2B3B3;
+            background-color: #FCFCFC;
+            font-size: 15px;
+            color: #1E2B2B;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 0px;          /* squared */
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="%233F5E5A" d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+        }
+        .dowry-calculator-form select:focus {
+            outline: 2px solid #2F6B66;
+            border-color: #2F6B66;
+        }
+
+        .dowry-calculator-form button {
+            display: block;
+            margin-top: 2rem;
+            padding: 16px 18px;
+            background-color: #1F2E2E;
+            color: #FFFFFF;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 0px;          /* sharp */
+            border-bottom: 4px solid #0F1C1C;
+        }
+        .dowry-calculator-form button i {
+            margin-right: 8px;
+        }
+        .dowry-calculator-form button:hover {
+            background-color: #2F5E58;
+            border-bottom-color: #1A3A36;
+        }
+
+        /* modal — angular, no emoji, stark */
+        .result-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(18, 28, 28, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(2px);
+        }
+        .result-card {
+            background: #F7F5F0;
+            max-width: 580px;
+            width: 90%;
+            padding: 44px 32px;
+            text-align: center;
+            box-shadow: 12px 12px 0 #1C2C2C;
+            border: 2px solid #2C4945;
+            animation: fadeSharp 0.3s ease;
+            border-radius: 0px;
+        }
+        .result-card h3 {
+            font-size: 34px;
+            color: #A13D2F;
+            margin-bottom: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .dowry-worth {
+            font-size: 64px;
+            font-weight: 900;
+            background: #D9B650;
+            display: inline-block;
+            padding: 16px 36px;
+            margin: 24px 0;
+            color: #142121;
+            letter-spacing: 3px;
+            box-shadow: 8px 8px 0 #7F6230;
+            border-radius: 0px;
+        }
+        .fun-message {
+            font-size: 20px;
+            margin: 20px 0 16px;
+            color: #1F3A3A;
+            font-weight: 600;
+            border-top: 2px dashed #708E8E;
+            padding-top: 22px;
+        }
+        .close-result {
+            background-color: #3A6862;
+            border: none;
+            color: white;
+            padding: 14px 36px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.1s;
+            text-transform: uppercase;
+            border-radius: 0px;
+            border-bottom: 4px solid #1F403C;
+        }
+        .close-result i {
+            margin-right: 6px;
+        }
+        .close-result:hover {
+            background-color: #1C4842;
+        }
+
+        @keyframes fadeSharp {
+            0% { opacity: 0; transform: scale(0.92); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* footer — no roundness */
+        .fun-footer {
+            background-color: #162424;
+            color: #C0CECE;
+            padding: 40px 20px 24px;
+            margin-top: 40px;
+            border-top: 6px solid #2A5E58;
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer-logo img {
+            max-width: 190px;
+            filter: brightness(0) invert(1);
+        }
+        .footer-text {
+            font-size: 14px;
+            max-width: 400px;
+            margin-top: 18px;
+        }
+        .social-icons a {
+            color: #E0E6E6;
+            margin-right: 20px;
+            font-size: 26px;
+            text-decoration: none;
+        }
+        .disclaimer {
+            font-size: 14px;
+            margin-top: 28px;
+            color: #485E5E;
+            background: #EAEFEF;
+            padding: 12px 14px;
+            text-align: center;
+            border-left: 8px solid #4B7A74;
+            font-weight: 600;
+            border-radius: 0px;
+        }
+
+        @media (max-width: 768px) {
+            .inner-grid { flex-direction: column; }
+            .form-row { flex-direction: column; gap: 16px; }
+            .form-group { width: 100% !important; }
+            h2 { font-size: 32px; }
+            .dowry-worth { font-size: 48px; padding: 12px 20px; }
+            .form-row.three-col .form-group { width: 100%; }
+        }
+
+        /* additional sharpness */
+        select, button, .result-card, .dowry-calculator-form {
+            border-radius: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="fun-header">
+    <div class="logo">
+        <img src="https://shaadi.org/wp-content/uploads/2021/09/Logo.svg" alt="Shaadi.org">
+    </div>
+    <div class="nav-placeholder">
+        <i class="fas fa-balance-scale"></i> DahejAI · Know Your Market Value
+    </div>
+</div>
+
+<div class="dowry-section">
+    <div class="ast-container">
+        <div class="inner-grid">
+            <!-- Left: messaging (icon-driven, no emoji) -->
+            <div class="left-content">
+                <h2><i class="fas fa-calculator" style="color:#3F7E7A; margin-right: 8px;"></i> DahejAI — <br><span class="highlight">Accurate AI Dowry Index</span></h2>
+                <div class="tagline">
+                    <i class="fas fa-gem" style="margin-right: 6px;"></i> Car? Flat? Gold? Let’s calculate your <strong>“market worth”</strong> as per collected 50 million + data
+                </div>
+                <div class="hand-image">
+                    <img src="https://shaadi.org/wp-content/uploads/2024/05/Female-Hand.png" alt="symbolic hand">
+                </div>
+
+            </div>
+
+            <!-- Right: form with CASTE, SKIN, PURITY added — all Font Awesome, no emoji -->
+            <div class="right-form">
+                <form id="funDowryForm" class="dowry-calculator-form">
+
+                    <!-- row 1: age / profession -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Age</label>
+                            <select id="age" required>
+                                <option value="">Select</option>
+                                <option value="18-24">18-24 years</option>
+                                <option value="25-30">25-30 years</option>
+                                <option value="31-35">31-35 years</option>
+                                <option value="36-40">36-40 years</option>
+                                <option value="more than 40">More than 40 years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-briefcase"></i> Profession</label>
+                            <select id="profession" required>
+                                <option value="">Select</option>
+                                <option value="Entrepreneur">Entrepreneur</option>
+                                <option value="Engineer">Engineer</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Investment Banker">Investment Banker</option>
+                                <option value="Brand Manager">Brand Manager</option>
+                                <option value="Product Manager">Product Manager</option>
+                                <option value="Content Creator">Content Creator</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- row 2: salary / education -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-rupee-sign"></i> Monthly Salary</label>
+                            <select id="salary" required>
+                                <option value="">Select</option>
+                                <option value="Less than 50000">Less than 50,000</option>
+                                <option value="50100-1 lakh">50,100 - 1 lakh</option>
+                                <option value="1-2 lakhs">1-2 lakhs</option>
+                                <option value="2-5 lakhs">2-5 lakhs</option>
+                                <option value="more than 5 lakhs">More than 5 lakhs</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-graduation-cap"></i> Education</label>
+                            <select id="education" required>
+                                <option value="">Select</option>
+                                <option value="High School">High School</option>
+                                <option value="Graduation">Graduation</option>
+                                <option value="Post Graduation">Post Graduation</option>
+                                <option value="PhD">PhD / IIT / IIM</option>
+                                <option value="Dropout">Dropout (but sharp)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- row 3: residence / country -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-home"></i> Residence</label>
+                            <select id="residence" required>
+                                <option value="">Select</option>
+                                <option value="Self-owned">Self-owned</option>
+                                <option value="Rented">Rented</option>
+                                <option value="Parent’s house">Parent’s house</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-globe-asia"></i> Country</label>
+                            <select id="country" required>
+                                <option value="">Select</option>
+                                <option value="India">India</option>
+                                <option value="Abroad">Abroad (NRI factor)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- CASTE, SKIN COLOR, PURITY (three column row) -->
+                    <div class="form-row three-col">
+                        <div class="form-group">
+                            <label><i class="fas fa-users"></i> CASTE</label>
+                            <select id="caste" required>
+                                <option value="">Select</option>
+                                <option value="NON CHAMAR">NON CHAMAR </option>
+                                <option value="CHAMAR">CHAMAR </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-palette"></i> SKIN COLOR</label>
+                            <select id="skin" required>
+                                <option value="">Select</option>
+                                <option value="GORA">GORA </option>
+                                <option value="SANWALA">SANWALA</option>
+                                <option value="JAMWAL">JAMWAL </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-female"></i> PURITY</label>
+                            <select id="purity" required>
+                                <option value="">Select</option>
+                                <option value="0">0 </option>
+                                <option value="less5">&lt;5 okok </option>
+                                <option value="rand">IT's JUST A NUMBER</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" id="calculateBtn"><i class="fas fa-chart-bar"></i> Calculate Dowry Value</button>
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i> Dowry is kinda illegal & dehumanising. The metrics is created from data of more than 50 million + cases
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="resultModal" class="result-overlay">
+    <div class="result-card">
+        <h3><i class="fas fa-tag"></i> ESTIMATED DOWRY WORTH</h3>
+        <div class="dowry-worth" id="worthAmount">₹ 0</div>
+        <div class="fun-message" id="personalizedMsg">Your 'worth' according to AI filters</div>
+        <button class="close-result" id="closeModalBtn"><i class="fas fa-heart-broken"></i> Marry Forest, Not ...</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="fun-footer">
+    <div class="footer-inner">
+
+        <div class="footer-contact">
+            <h4 style="color:#E2E9E9;"><i class="fas fa-envelope"></i> Get in Touch</h4>
+            <p>2 B (2) II, Gr Floor, Film Center Building, Mumbai<br><i class="fas fa-at"></i> hello@shaadi.org</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top: 36px; font-size:13px; border-top: 1px solid #2A4A4A; padding-top: 20px;">
+        © 2025 wkwk.org · Dowry is a crime only if she is a green forest
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- REVISED CALCULATION (balanced: not too high, not too low) -----
+        // Typical range: ~₹2 Lakhs to ₹45 Lakhs | Max: ₹60 Lakhs
+        function calculateFunWorth(ageVal, profVal, salaryVal, eduVal, residenceVal, countryVal, casteVal, skinVal, purityVal) {
+            let base = 0;
+
+            // Age (mocking "prime")
+            if (ageVal === "18-24") base += 6;
+            else if (ageVal === "25-30") base += 14;
+            else if (ageVal === "31-35") base += 11;
+            else if (ageVal === "36-40") base += 6;
+            else if (ageVal === "more than 40") base += 3;
+
+            // Profession (scaled适中)
+            const profMap = {
+                "Entrepreneur": 18,
+                "Engineer": 15,
+                "Doctor": 22,
+                "Investment Banker": 28,
+                "Brand Manager": 14,
+                "Product Manager": 17,
+                "Content Creator": 9,
+                "Others": 6
+            };
+            base += profMap[profVal] || 8;
+
+            // Salary (realistic increments)
+            const salaryMap = {
+                "Less than 50000": 2,
+                "50100-1 lakh": 6,
+                "1-2 lakhs": 12,
+                "2-5 lakhs": 22,
+                "more than 5 lakhs": 38
+            };
+            base += salaryMap[salaryVal] || 4;
+
+            // Education
+            const eduMap = {
+                "High School": 2,
+                "Graduation": 9,
+                "Post Graduation": 17,
+                "PhD": 26,
+                "Dropout": 3
+            };
+            base += eduMap[eduVal] || 5;
+
+            // Residence
+            const resMap = {
+                "Self-owned": 16,
+                "Rented": 4,
+                "Parent’s house": 2
+            };
+            base += resMap[residenceVal] || 2;
+
+            // Country
+            if (countryVal === "Abroad") base += 22;
+            else if (countryVal === "India") base += 5;
+
+            // ---------- CASTE, SKIN, PURITY ----------
+            if (casteVal === "NON CHAMAR") base += 20;
+            else if (casteVal === "CHAMAR") base += 2;
+
+            if (skinVal === "GORA") base += 18;
+            else if (skinVal === "SANWALA") base += 7;
+            else if (skinVal === "JAMWAL") base += 1;
+
+            if (purityVal === "0") base += 24;
+            else if (purityVal === "less5") base += 6;
+            else if (purityVal === "rand") base += 0;
+
+            // Convert base points to rupees (1 point ≈ 0.15 Lakhs = 15,000 INR)
+            // Formula: totalLakhs = base * 0.15 + 1.5
+            let totalLakhs = (base * 0.15) + 1.5;
+
+            // Floor at 1.5 Lakh (₹1.5 Lakhs) and cap at 60 Lakhs (₹60 Lakhs)
+            if (totalLakhs > 60) totalLakhs = 60;
+            if (totalLakhs < 1.5) totalLakhs = 1.5;
+
+            return totalLakhs * 100000; // rupees
+        }
+
+        function formatWorthINR(amount) {
+            if (amount >= 10000000) {
+                let crores = amount / 10000000;
+                return `₹ ${crores.toFixed(1)} Crore`;
+            } else if (amount >= 100000) {
+                let lakhs = amount / 100000;
+                return `₹ ${lakhs.toFixed(1)} Lakhs`;
+            } else {
+                return `₹ ${amount.toLocaleString('en-IN')}`;
+            }
+        }
+
+        function getHumorousMessage(amount, caste, skin, purity) {
+            const lakhs = amount / 100000;
+            let msg = '';
+            if (lakhs >= 40) msg = "🔥 Extremely high 'market rate'! Privilege is inflating this number massively. ";
+            else if (lakhs >= 25) msg = "💰 Premium valuation by regressive filters. Dowry is illegal — your worth is not in rupees. ";
+            else if (lakhs >= 10) msg = "📊 Middle-tier mock valuation. The system devalues many based on identity. ";
+            else msg = "⚠️ Low 'dowry index'. This is exactly why we must dismantle these standards. ";
+
+            if (caste === "CHAMAR" || skin === "JAMWAL" || purity === "rand") {
+                msg += "⚡ The calculator punishes you for identity — that's the point. Real value transcends bigotry.";
+            } else {
+                msg += "🎭 Privilege inflates the number. Use your voice against dowry.";
+            }
+            return msg;
+        }
+
+        // DOM elements
+        const modal = document.getElementById('resultModal');
+        const worthSpan = document.getElementById('worthAmount');
+        const msgSpan = document.getElementById('personalizedMsg');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const calcBtn = document.getElementById('calculateBtn');
+
+        const ageSelect = document.getElementById('age');
+        const profSelect = document.getElementById('profession');
+        const salarySelect = document.getElementById('salary');
+        const eduSelect = document.getElementById('education');
+        const residenceSelect = document.getElementById('residence');
+        const countrySelect = document.getElementById('country');
+        const casteSelect = document.getElementById('caste');
+        const skinSelect = document.getElementById('skin');
+        const puritySelect = document.getElementById('purity');
+
+        function validateSelections() {
+            const fields = [ageSelect, profSelect, salarySelect, eduSelect, residenceSelect, countrySelect, casteSelect, skinSelect, puritySelect];
+            for (let f of fields) {
+                if (!f.value) {
+                    alert("Please fill all fields — even the absurd ones — to see the satirical result.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        calcBtn.addEventListener('click', function() {
+            if (!validateSelections()) return;
+
+            const age = ageSelect.value;
+            const profession = profSelect.value;
+            const salary = salarySelect.value;
+            const education = eduSelect.value;
+            const residence = residenceSelect.value;
+            const country = countrySelect.value;
+            const caste = casteSelect.value;
+            const skin = skinSelect.value;
+            const purity = puritySelect.value;
+
+            const worthRupees = calculateFunWorth(age, profession, salary, education, residence, country, caste, skin, purity);
+            const formatted = formatWorthINR(worthRupees);
+            const message = getHumorousMessage(worthRupees, caste, skin, purity);
+
+            worthSpan.innerText = formatted;
+            msgSpan.innerText = message;
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    })();
+</script>
+</body>
+</html>
