@@ -601,15 +601,15 @@
         function getHumorousMessage(amount, caste, skin, purity) {
             const lakhs = amount / 100000;
             let msg = '';
-            if (lakhs >= 40) msg = "🔥 Extremely high 'market rate'! Privilege is inflating this number massively. ";
-            else if (lakhs >= 25) msg = "💰 Premium valuation by regressive filters. Dowry is illegal — your worth is not in rupees. ";
-            else if (lakhs >= 10) msg = "📊 Middle-tier mock valuation. The system devalues many based on identity. ";
-            else msg = "⚠️ Low 'dowry index'. This is exactly why we must dismantle these standards. ";
+            if (lakhs >= 40) msg = "🔥 Extremely high 'market rate'!  ";
+            else if (lakhs >= 25) msg = "💰 Premium valuation by regressive filters.  ";
+            else if (lakhs >= 10) msg = "📊 Middle-tier mock valuation. ";
+            else msg = "⚠️ Low 'dowry index'. ";
 
             if (caste === "CHAMAR" || skin === "JAMWAL" || purity === "rand") {
-                msg += "⚡ The calculator punishes you for identity — that's the point. Real value transcends bigotry.";
+                msg += "";
             } else {
-                msg += "🎭 Privilege inflates the number. Use your voice against dowry.";
+                msg += "";
             }
             return msg;
         }
